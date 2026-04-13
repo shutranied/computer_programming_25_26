@@ -26,24 +26,66 @@ flower1 = {
 
 # Task 1: Create A dictionary for second flower
 
-# flower2 = {
-# "id": "flower2",
-# <your code here>: 4.9,
-# <your code here> add key value
-# "species": "setosa"
-# <your code here> remember to close me for a dict
+flower2 = {
+"id": "flower2",
+"sepal_length": 4.9,
+"sepal_width": 3.0,
+"petal_length": 1.4,
+"petal_width": 0.2,
+"species": "setosa"
+}
+
+#remember to close me for a dict
 
 
 # Task 2: Create list of dictionaries
-# dataset= <your code here>
+dataset= [flower1,flower2]
 
+print("\n=== Start session 3 Prediction Loop ===")
 
 # Task 3: Create a for loop to process the dataset
-# for <your code here> in dataset:
-#     print(<your code here>["id"], <your code here>["petal_length"], <your code here>["species"])
+for sample in dataset:
+    print(sample ["id"], sample ["petal_length"], sample ["species"])
 
-# Task 4: Use an if-else statement to classify each sample
-# if <your code here>["petal_length"] < threshold:
-#     y_pred = positive_label
-# <your code here>
-#     <your code here> = negative_label
+# Task 4: Use an if-else statement to classify each sample based on the threshold rule
+    if sample [FEATURE_NAME] < THRESHOLD:
+            y_pred = POSITIVE_LABEL
+    else:
+            y_pred = NEGATIVE_LABEL
+
+    # Task 5:. Derive true label (y_true) from the dataset sample
+    if sample[LABEL_KEY] == POSITIVE_LABEL:
+        y_true = POSITIVE_LABEL
+    else:
+        y_true = NEGATIVE_LABEL
+
+    # Task 6: Update correct or wrong counter
+    if y_pred == y_true:
+        correct += 1
+    else:
+        wrong += 1
+
+    # Task 7: ALWAYS increment total for every sample processed
+    total += 1
+
+    # Task 8: Append the prediction to our list
+    y_pred_list.append(y_pred)
+
+    # Task 9: Print per-sample trace exactly as required
+    print(
+        f"id={sample['id']} | true={y_true} | pred={y_pred} | "
+        f"petal_length={sample['petal_length']}"
+    )
+
+
+
+
+# Task 10: Compute and print final metrics
+accuracy = (correct / total) * 100 if total > 0 else 0.0
+
+print("\n=== session 3 Summary ===")
+print("Correct:", correct)
+print("Wrong:", wrong)
+print("Total:", total)
+print("Accuracy (%):", round(accuracy, 2))
+print("All predictions:", y_pred_list)
