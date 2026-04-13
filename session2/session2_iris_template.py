@@ -54,14 +54,4 @@ petal_width_2 = 0.2
 
 petal_area_2 = petal_length_2 * petal_width_2
 print("Petal Area 2:", petal_area_2)
-# petal_area = ???? * ????
-# print("\nPetal Area:", petal_area)  Uncomment the area
 
-threshold = 2.0
-feature_name = "petal_length"
-positive_label = "setosa"
-negative_label = "not_setosa"
-label_key = "species"
-
-# Task 5: Comparing with threshold
-# is_short_petal = ???? < threshold
