@@ -48,11 +48,11 @@ class IrisRuleClassifier:
                                are predicted as setosa.
         """
         # Store the threshold as an attribute on self.
-        # self.threshold = <your code here>
+        self.threshold = 2.0
 
         # We enforce these attribute names so later sessions can reuse your class.
-        # self.positive_label = <your code here>   # should be the string "setosa"
-        # self.negative_label = <your code here>   # should be the string "not_setosa"
+        self.positive_label = "setosa"  # should be the string "setosa"
+        self.negative_label = "not_setosa"   # should be the string "not_setosa"
         pass
 
     def print_status(self, status_text):

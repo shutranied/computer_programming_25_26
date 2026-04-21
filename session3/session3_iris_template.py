@@ -1,4 +1,7 @@
-
+"""Session 3: Lists, Loops, and Conditionals for Iris classification.
+This script builds on Session 2 by converting variables to dictionaries, assembling a dataset list,
+iterating over it, applying a threshold rule, and computing accuracy metrics.
+"""
 
 # Session 2 continuity variables (Rule settings). Do not change these.
 THRESHOLD = 2.0
@@ -7,14 +10,14 @@ POSITIVE_LABEL = "setosa"
 NEGATIVE_LABEL = "not_setosa"
 LABEL_KEY = "species"
 
-
-
+# Initialize metrics and prediction list
 correct = 0      # Count of correct predictions
 wrong = 0        # Count of wrong predictions
 total = 0        # Total samples processed
 y_pred_list = []  # List of all predictions made
 
-
+# Task 1: Define dictionaries for flower1 and flower2 using canonical keys
+# We remove the sequential variables and group them logically.
 flower1 = {
     "id": "flower1",
     "sepal_length": 5.1,

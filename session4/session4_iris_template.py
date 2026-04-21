@@ -18,9 +18,11 @@ def make_print_status(status_text):
     Args:
         status_text (str): A short message to show what the program is doing.
     """
-    pass
+    print(f"[STATUS] {status_text}")
+    make_print_status("Build dataset")
 
 # Task 2: Create the flower dataset
+
 
 
 def setup_application_list():
@@ -37,16 +39,19 @@ def setup_application_list():
         "species": "setosa"
     }
 
-    # flower2 = {
-    #     "id": "flower2",
-    # }
+    flower2 = {
+        "id": "flower2",
+        "sepal_length": 4.9,
+        "sepal_width": 3.0,
+        "petal_length": 1.4,
+        "petal_width": 0.2,
+        "species": "setosa"
+    }
 
     # Task 2 in session 3: Build the dataset list
     # Combine our dictionaries into a single list
-    dataset = [flower1
-               #    , flower2
-               ]
-    print("Dataset:", dataset)
+    dataset = [flower1, flower2]
+    print("Dataset:", dataset)  
     # Note here that we return the dataset list from this function, so we can use it later in the main function.
     return dataset
 
@@ -68,7 +73,12 @@ def compute_threshold_prediction(sample):
     """
     # we deliberately put the pass here, and student need to replace it with the if statement and return statement to make the prediction.
     # This should be given in the instruction, on what they should paste. sub task 5, the need to also give the return statement, which is missing in the instruction now.
-    pass
+    if sample[FEATURE_NAME] < THRESHOLD:
+        y_pred = POSITIVE_LABEL
+    else:
+        y_pred = NEGATIVE_LABEL
+
+    return y_pred
 
 # Task 6: Convert species into the lesson’s binary label
 
@@ -95,8 +105,6 @@ def derive_true_label(sample):
     return y_true
 
 # Task 7: Update prediction counts and save results
-
-
 def update_result_counts(correct, wrong, total, y_pred_list, y_pred, y_true):
     """Update the counters and prediction list for one sample.
 
@@ -112,10 +120,17 @@ def update_result_counts(correct, wrong, total, y_pred_list, y_pred, y_true):
         tuple: Updated correct, wrong, total, y_pred_list
     """
     # we will provide only a pass, but we drop all of below code, and student need to write the if statement to compare y_pred and y_true, and update the correct and wrong counts accordingly. They also need to remember to update the total count and append the y_pred to the y_pred_list.
-    pass
+    if y_pred == y_true:
+        correct += 1
+    else:
+        wrong += 1
+
+    total += 1
+    y_pred_list.append(y_pred)
+
+    return correct, wrong, total, y_pred_list
 
 # Task 10: Compute the overall accuracy
-
 
 def calculate_accuracy(correct, total):
     """Calculate accuracy percentage.
@@ -132,12 +147,12 @@ def calculate_accuracy(correct, total):
     else:
         accuracy = 0.0
 
+    return accuracy
+
     # They need to provide the return value, maybe, we can ask them, what is missing in this function, go and check the function call in the main function, and see what they need to return here to make the main function work.
 
 
 # Entry to Task 4 until Task 9: Run the same prediction loop from Session 3, Wrap the prediction workflow in a function
-
-
 def run_prediction_loop(dataset):
     """Run the same prediction loop from Session 3, but inside a function.
 
@@ -162,29 +177,29 @@ def run_prediction_loop(dataset):
     for sample in dataset:
         print("\nProcessing sample with id:", sample["id"])
 
+
         # Task 5: Predict the class using petal length
         y_pred = compute_threshold_prediction(sample)
 
         # Task 6: Convert species into the lesson’s binary label
         # For task 6, student are require to create the function call and function definition:y_true = derive_true_label(sample)
+        y_true = derive_true_label(sample)
 
         # Task 7: Update prediction counts and save results
         # For task 7, we will not provide the correct, wrong, total, y_pred_list = update_result_counts( correct, wrong, total, y_pred_list, y_pred, y_true ), even the function body is only a pass
-        correct, wrong, total, y_pred_list = update_result_counts(
-            correct, wrong, total, y_pred_list, y_pred, y_true)
-
+        correct, wrong, total, y_pred_list = update_result_counts(correct, wrong, total, y_pred_list, y_pred, y_true)
+        
         # Task 8: Display the result for each sample
         # The just need to uncomment the print statement below to see the result for each sample,
-        # print(
-        #     f"id={sample['id']} | true={y_true} | pred={y_pred} | "
-        #     f"petal_length={sample['petal_length']}"
-        # )
+        print(
+            f"id={sample['id']} | true={y_true} | pred={y_pred} | "
+            f"petal_length={sample['petal_length']}"
+        )
     # Task 9: Return the prediction loop results
-    return < your_code > , wrong, < your_code > , < your_code >
+    return correct, wrong, total, y_pred_list
+
 
 # Task 10: Calculate accuracy
-
-
 def calculate_accuracy(correct, total):
     """Calculate accuracy percentage.
 
@@ -199,11 +214,10 @@ def calculate_accuracy(correct, total):
         accuracy = (correct / total) * 100
     else:
         accuracy = 0.0
+    return accuracy
 
 
 # Task 12: Create and call the summary-report function
-
-
 def print_summary(correct, wrong, total, y_pred_list, accuracy):
     """Print the final results after the loop is finished.
 
@@ -224,29 +238,32 @@ def print_summary(correct, wrong, total, y_pred_list, accuracy):
 
 def main():
     """Run the full beginner version of the program."""
+    
+dataset = setup_application_list()
 
     # Task 1 : Create a helper function to print status updates
-    make_print_status("Build dataset")
 
     # Task 2: Create the flower dataset
-    dataset = setup_application_list()
+
+
+    # Dictionaries for flower1 and flower2 from Session 3
 
     # Task 3 : Show a status update before running prediction
     # Uncomment this line to see status messages
-    make_print_status("Run prediction loop")
-
+make_print_status("Run prediction loop")
+correct, wrong, total, y_pred_list = run_prediction_loop(dataset)
+   
     # Entry to Task 4 until Task 9: Wrap the prediction workflow in a function
-    # correct, <your_code>, total, y_pred_list = run_prediction_loop(dataset)
-    correct, wrong, total, y_pred_list = run_prediction_loop(dataset)
+
 
     # Task 10: Calculate accuracy
-    accuracy = calculate_accuracy(correct, total)
+accuracy = calculate_accuracy(correct, total)
 
     # Task 11: Show a status update before printing the summary
-    make_print_status( < your_code > )
+make_print_status("Print summary")
 
     # Task 12: Create and call the summary-report function
-    print_summary(correct, wrong, total, y_pred_list, accuracy)
+print_summary(correct, wrong, total, y_pred_list, accuracy)
 
 
 if __name__ == "__main__":

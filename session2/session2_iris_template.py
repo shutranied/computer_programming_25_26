@@ -54,4 +54,3 @@ petal_width_2 = 0.2
 
 petal_area_2 = petal_length_2 * petal_width_2
 print("Petal Area 2:", petal_area_2)
-
