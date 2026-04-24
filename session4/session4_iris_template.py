@@ -19,12 +19,9 @@ def make_print_status(status_text):
         status_text (str): A short message to show what the program is doing.
     """
     print(f"[STATUS] {status_text}")
-    make_print_status("Build dataset")
+make_print_status("Build dataset")
 
 # Task 2: Create the flower dataset
-
-
-
 def setup_application_list():
     """Combination of Task I and Task II in session III, but now in a function."""
 
@@ -51,12 +48,11 @@ def setup_application_list():
     # Task 2 in session 3: Build the dataset list
     # Combine our dictionaries into a single list
     dataset = [flower1, flower2]
-    print("Dataset:", dataset)  
+    print("Dataset:", dataset)
     # Note here that we return the dataset list from this function, so we can use it later in the main function.
     return dataset
 
 # Task 5: Predict the class using petal length
-
 
 def compute_threshold_prediction(sample):
     """Predict the label for one flower sample.
@@ -81,8 +77,6 @@ def compute_threshold_prediction(sample):
     return y_pred
 
 # Task 6: Convert species into the lesson’s binary label
-
-
 def derive_true_label(sample):
     """Convert the real species into the lesson label.
 
@@ -188,7 +182,7 @@ def run_prediction_loop(dataset):
         # Task 7: Update prediction counts and save results
         # For task 7, we will not provide the correct, wrong, total, y_pred_list = update_result_counts( correct, wrong, total, y_pred_list, y_pred, y_true ), even the function body is only a pass
         correct, wrong, total, y_pred_list = update_result_counts(correct, wrong, total, y_pred_list, y_pred, y_true)
-        
+
         # Task 8: Display the result for each sample
         # The just need to uncomment the print statement below to see the result for each sample,
         print(
@@ -238,31 +232,31 @@ def print_summary(correct, wrong, total, y_pred_list, accuracy):
 
 def main():
     """Run the full beginner version of the program."""
-    
+
 dataset = setup_application_list()
 
-    # Task 1 : Create a helper function to print status updates
+# Task 1 : Create a helper function to print status updates
 
-    # Task 2: Create the flower dataset
+# Task 2: Create the flower dataset
 
 
-    # Dictionaries for flower1 and flower2 from Session 3
+# Dictionaries for flower1 and flower2 from Session 3
 
-    # Task 3 : Show a status update before running prediction
-    # Uncomment this line to see status messages
+# Task 3 : Show a status update before running prediction
+# Uncomment this line to see status messages
 make_print_status("Run prediction loop")
 correct, wrong, total, y_pred_list = run_prediction_loop(dataset)
-   
-    # Entry to Task 4 until Task 9: Wrap the prediction workflow in a function
+
+# Entry to Task 4 until Task 9: Wrap the prediction workflow in a function
 
 
-    # Task 10: Calculate accuracy
+# Task 10: Calculate accuracy
 accuracy = calculate_accuracy(correct, total)
 
-    # Task 11: Show a status update before printing the summary
+# Task 11: Show a status update before printing the summary
 make_print_status("Print summary")
 
-    # Task 12: Create and call the summary-report function
+# Task 12: Create and call the summary-report function
 print_summary(correct, wrong, total, y_pred_list, accuracy)
 
 
